@@ -17,7 +17,7 @@ export default class ProjectItem extends Component {
     const { item } = this.props;
     return (
       <View style={styles.mainView}>
-        <View>
+        <View style={styles.containerView}>
           <Image style={styles.image} source={images[item['poster-image'].replace(/\.[^/.]+$/, '')]} />
           <View style={styles.titleView}>
             <Text style={styles.titleText} numberOfLines={1}>

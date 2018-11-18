@@ -11,16 +11,19 @@ export default StyleSheet.create({
     borderRadius: 4,
   },
   image: {
-    height: deviceWidth * 0.45,
-    width: deviceWidth * 0.30,
+    height: deviceWidth * 0.43,
+    width: deviceWidth * 0.28,
+  },
+  containerView:{
+    width: deviceWidth * 0.28,
   },
   titleView: {
     paddingTop: 8,
-    marginBottom:16,
+    marginBottom: 16,
     alignItems: 'flex-start',
   },
   titleText: {
-    fontSize: 16,
+    fontSize: 14,
     color: variables.cardTitleColor,
     fontWeight: '200',
     textAlign: 'left',

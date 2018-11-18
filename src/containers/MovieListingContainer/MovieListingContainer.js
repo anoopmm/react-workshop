@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {
   Container,
-  Content,
-  Button,
   View,
   Text,
-  Header,
-  Left,
-  Right,
-  Icon,
-  Body,
-  Title,
 } from 'native-base';
 import {
   Image,
   TouchableOpacity,
-  Linking,
   TextInput,
   FlatList,
   ImageBackground,
@@ -32,11 +22,15 @@ class MovieListing extends Component {
   static propTypes = {
     getMovieFullList: PropTypes.func,
     movies: PropTypes.instanceOf(Array),
+    title: PropTypes.string,
+    totalCount: PropTypes.string,
   };
 
   static defaultProps = {
     movies: [],
     getMovieFullList: () => {},
+    title: '',
+    totalCount: '',
   };
 
   state = {
@@ -51,12 +45,12 @@ class MovieListing extends Component {
   }
 
   onScrollToBottom(event) {
-    const { getMovieFullList } = this.props;
+    const { getMovieFullList, movies, totalCount } = this.props;
     const { index } = this.state;
-    const itemHeight = 500;
+    const itemHeight = 400;
     const currentOffset = Math.floor(event.nativeEvent.contentOffset.y);
     const currentItemIndex = Math.ceil(currentOffset / itemHeight);
-    if (currentItemIndex > index && this.props.movies.length < this.props.totalCount) {
+    if (currentItemIndex > index && movies.length < parseInt(totalCount)) {
       getMovieFullList(currentItemIndex);
       this.setState({
         index: currentItemIndex,
@@ -85,7 +79,6 @@ class MovieListing extends Component {
     const { movies } = this.props;
     const { input } = this.state;
     if (movies) {
-      // console.log(this.props.movies.page['content-items']);
       const sortedResult = movies.filter(item => {
         const itemName = item.name.toUpperCase();
         const searchName = input.toUpperCase();
@@ -104,23 +97,24 @@ class MovieListing extends Component {
           scrollEventThrottle={500}
           style={styles.listStyle}
           onScroll={event => this.onScrollToBottom(event)}
+          contentContainerStyle={{ paddingBottom: 100 }}
         />
       );
     }
     return (
       <Text>
-
-
 No results available for
-{' '}
+        {' '}
         { input }
-            </Text>
+      </Text>
     );
   }
 
   renderTitleView() {
-    if (!this.state.showSearchBox) {
-      return <Text style={styles.titleText}>{this.props.title}</Text>;
+    const { showSearchBox, input } = this.state;
+    const { title } = this.props;
+    if (!showSearchBox) {
+      return <Text style={styles.titleText}>{title}</Text>;
     }
     return (
       <TextInput
@@ -128,12 +122,13 @@ No results available for
         onChangeText={text => this.setState({ input: text })}
         placeholder="Search here..."
         placeholderTextColor="white"
-        value={this.state.input}
+        value={input}
       />
     );
   }
 
   render() {
+    // console.log(this.props);
     return (
       <Container>
         <ImageBackground source={images.navBar} style={styles.navBar}>

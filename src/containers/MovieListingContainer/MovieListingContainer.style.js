@@ -1,11 +1,13 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import variables from '../../native-base-theme/variables/platform';
+
 
 const deviceWidth = Dimensions.get('window').width;
 export default StyleSheet.create({
   contentStyle: {
     flex: 1,
     backgroundColor: '#212121',
+    paddingLeft: deviceWidth * 0.018,
+    paddingRight: deviceWidth * 0.018,
 
   },
   navBar: {
@@ -27,17 +29,19 @@ export default StyleSheet.create({
   leftIconView: {
     flex: 1,
     justifyContent: 'center',
-    paddingLeft: deviceWidth * 0.015,
+    paddingLeft: deviceWidth * 0.04,
   },
   rightIconView: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: deviceWidth * 0.04,
   },
   titleView: {
     flex: 5,
     justifyContent: 'center',
   },
-  titleText:{
-    fontSize:16
-  }
+  titleText: {
+    fontSize: 20,
+  },
 });
