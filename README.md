@@ -18,7 +18,7 @@ Step 2
 ```
 react-native link
 ```
-Step 2
+Step 3
 
 ```
 react-native run-android
