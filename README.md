@@ -1,1 +1,1 @@
-# Build Next App
+# React Native Workshop
